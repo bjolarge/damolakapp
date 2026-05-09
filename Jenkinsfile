@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         APP_NAME       = 'damolakapp'
-        AWS_REGION     = 'us-east-1'
+        AWS_REGION     = 'eu-north-1'
         ECR_REPO_URL   = credentials('ECR_REPO_URL')   // e.g. 123456789.dkr.ecr.us-east-1.amazonaws.com/damolakapp
         EC2_HOST       = credentials('EC2_HOST')        // your EC2 public IP
         EC2_USER       = 'ec2-user'

@@ -128,7 +128,7 @@ terraform apply
 After apply, note the outputs:
 ```
 ec2_public_ip      = "x.x.x.x"
-ecr_repository_url = "123456789.dkr.ecr.us-east-1.amazonaws.com/damolakapp"
+ecr_repository_url = "123456789.dkr.ecr.eu-north-1.amazonaws.com/damolakapp"
 secret_arn         = "arn:aws:secretsmanager:..."
 ```
 
