@@ -11,7 +11,7 @@ export class CreateProductDto {
     productname!:string;
     
     @ApiProperty({
-    example: 'productQuantity',
+    example: '1',
     description: 'Product Quantity',
   })
     @IsNumber()
