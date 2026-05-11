@@ -1,22 +1,9 @@
 # DAMOLAKAPP — Production DevOps Deployment
 # URL:http://13.48.55.2:3000/
 
-## Table of Contents
-- [Architecture Overview](#architecture-overview)
-- [Tech Stack](#tech-stack)
-- [Repository Structure](#repository-structure)
-- [Prerequisites](#prerequisites)
-- [Deployment Steps](#deployment-steps)
-- [CI/CD Pipeline](#cicd-pipeline)
-- [Design Decisions](#design-decisions)
-- [Assumptions](#assumptions)
-- [Limitations & Future Improvements](#limitations--future-improvements)
-
----
-
 ## Architecture Overview
 
-```
+
 Developer → GitHub (push) → Jenkins CI/CD Pipeline
                                     │
                     ┌───────────────┼───────────────┐
@@ -33,15 +20,11 @@ Developer → GitHub (push) → Jenkins CI/CD Pipeline
                                     │
                          Aiven PostgreSQL (TLS/SSL)
                          port 13839 — external managed DB
-```
-
-**Traffic flow:**
+Traffic flow:
 - HTTP requests hit EC2 on port 80
 - Nginx reverse proxies to the NestJS container on port 3000
 - NestJS connects to Aiven PostgreSQL over SSL using credentials fetched from AWS Secrets Manager
 - CloudWatch Agent ships container logs and system metrics to AWS CloudWatch
-
----
 
 ## Tech Stack
 
@@ -57,11 +40,8 @@ Developer → GitHub (push) → Jenkins CI/CD Pipeline
 | Reverse Proxy | Nginx |
 | IaC | Terraform >= 1.5.0 |
 
----
-
 ## Repository Structure
 
-```
 damolakapp/
 ├── src/                          # NestJS application source
 ├── test/                         # Jest tests
@@ -83,9 +63,6 @@ damolakapp/
 ├── Jenkinsfile                   # CI/CD pipeline definition
 ├── package.json
 └── README.md
-```
-
----
 
 ## Prerequisites
 
@@ -100,15 +77,14 @@ Before deploying, ensure you have:
   - Pipeline: AWS Steps
   - SSH Agent Plugin
 - [ ] Aiven PostgreSQL instance running with SSL enabled
-- [ ] Your `DB_SSLG` — base64 encoded Aiven CA certificate
+- [ ] I use `DB_SSLG` — base64 encoded Aiven CA certificate
 
----
 
 ## Deployment Steps
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/damolakapp.git
+git clone https://github.com/bjolarge/damolakapp.git
 cd damolakapp
 ```
 
@@ -116,8 +92,7 @@ cd damolakapp
 ```bash
 cd terraform
 cp terraform.tfvars.example terraform.tfvars
-# Edit terraform.tfvars with your real values — never commit this file
-```
+# Edit terraform.tfvars with your real values — never commit this file, add to .gitignore
 
 ### 3. Provision AWS infrastructure
 ```bash
@@ -168,8 +143,8 @@ curl http://<EC2_PUBLIC_IP>/api
 
 ### Local Development
 ```bash
-cp .env.example .env       # fill in your local DB values
-docker compose up --build  # starts app + local postgres
+cp .env.example .env       
+docker compose up --build 
 ```
 
 ---
